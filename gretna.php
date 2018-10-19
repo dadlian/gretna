@@ -2,18 +2,9 @@
   require __DIR__ . '/vendor/autoload.php';
   use Twilio\TwiML\MessagingResponse;
 
-  header("content-type: text/xml");
   $message = strtolower($_REQUEST['Body']);
 
   $defaults = ["A wah ya ask me dey?","Eee?","Who you?","Chupz"];
-
-    $movies = findShowtimes(date("N"));
-    $reply = "Caribbean Cinemas a show:\n";
-    foreach($movies as $movie => $times){
-      if($times){
-        $reply .= "$movie: ".implode(", ",$times)."\n";
-      }
-    }
 
   switch($message){
     case "what is showing?":
@@ -34,6 +25,7 @@
     $reply
   );
 
+  header("content-type: text/xml");
   echo $response;
 
   function findShowtimes($day){
